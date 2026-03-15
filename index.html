@@ -1,1456 +1,361 @@
-<!DOCTYPE html>
-<html lang="ka">
-<head>
-  <meta name="google-site-verification" content="IpBVXhhTVmTsynX7ZoiQzAqbf1mypQ9lJ6dGdC85H9c" />
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>კოტეჯები საქართველოში | ხის კოტეჯები მშენებლობა | CraftBuild</title>
-  <meta name="description" content="კოტეჯები და ხის კოტეჯები საქართველოში. პროფესიონალური მშენებლობა, ინდივიდუალური პროექტები. მთა, ზღვა, სოფელი — ავაშენებთ თქვენს სიზმარ კოტეჯს.">
-  <meta name="keywords" content="კოტეჯები, ხის კოტეჯები, კოტეჯის მშენებლობა, კოტეჯი საქართველოში, ხის სახლი, კოტეჯი კახეთში, კოტეჯი გუდაურში, კოტეჯი ბათუმში">
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="CraftBuild">
-  <meta name="geo.region" content="GE">
-  <meta name="geo.placename" content="Georgia">
-  <link rel="canonical" href="https://craftbuild.ge/">
+import React, { useState, useEffect } from 'react';
+import { 
+  Home, 
+  Trees, 
+  CheckCircle, 
+  Phone, 
+  Mail, 
+  MapPin, 
+  Menu, 
+  X, 
+  ArrowRight,
+  ShieldCheck,
+  Clock,
+  Hammer,
+  ThermometerSnowflake,
+  Info
+} from 'lucide-react';
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://craftbuild.ge/">
-  <meta property="og:title" content="კოტეჯები საქართველოში | ხის კოტეჯები | CraftBuild">
-  <meta property="og:description" content="კოტეჯები და ხის კოტეჯები საქართველოში. პროფესიონალური მშენებლობა, ინდივიდუალური პროექტები.">
-  <meta property="og:locale" content="ka_GE">
+const App = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="კოტეჯები საქართველოში | CraftBuild">
-  <meta name="twitter:description" content="ხის კოტეჯები და კოტეჯები საქართველოში. პროფესიონალური მშენებლობა.">
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  <!-- Schema.org Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "CraftBuild - კოტეჯების მშენებლობა",
-    "description": "კოტეჯები და ხის კოტეჯები საქართველოში. პროფესიონალური მშენებლობა.",
-    "url": "https://craftbuild.ge",
-    "telephone": "+995-XXX-XXX-XXX",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "GE",
-      "addressLocality": "თბილისი"
+  const projects = [
+    {
+      id: 1,
+      title: "მინიმალისტური A-Frame",
+      size: "45მ²",
+      price: "1000₾ / მ²",
+      img: "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&q=80&w=800",
+      description: "კომპაქტური და თანამედროვე A-სტილის ხის კოტეჯები, რომლებიც იდეალურია დასასვენებლად. მოიცავს ანტრესოლს და პანორამულ ფანჯრებს.",
+      features: ["ენერგოეფექტური", "სწრაფი მონტაჟი", "ეკოლოგიური მასალა"]
     },
-    "areaServed": "GE",
-    "serviceType": ["კოტეჯების მშენებლობა", "ხის კოტეჯები", "სახლების მშენებლობა"]
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "რა ღირს კოტეჯის მშენებლობა საქართველოში?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "კოტეჯის მშენებლობის ფასი საქართველოში დამოკიდებულია ზომაზე, მასალებზე და ლოკაციაზე. საშუალოდ ხის კოტეჯი ღირს 500-1000 ლარი კვ.მ-ზე."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "რამდენ ხანს გრძელდება კოტეჯის მშენებლობა?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "სტანდარტული კოტეჯის მშენებლობა გრძელდება 3-6 თვე, ხოლო ხის კოტეჯის მშენებლობა შეიძლება მხოლოდ 2-3 თვეში დასრულდეს."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "რომელი მასალაა საუკეთესო კოტეჯისთვის?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "ხე არის საუკეთესო მასალა კოტეჯებისთვის — ბუნებრივი, თბილი, გამძლე. ხის კოტეჯები კარგად ინარჩუნებს სითბოს ზამთარში და სიგრილეს ზაფხულში."
-        }
-      }
-    ]
-  }
-  </script>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --forest: #1a2e1a;
-      --moss: #2d4a2d;
-      --sage: #4a6741;
-      --fern: #6b8f5e;
-      --mist: #c8d8c0;
-      --cream: #f5f0e8;
-      --bark: #8b6f47;
-      --wood: #c4a882;
-      --amber: #d4841a;
-      --stone: #9a9080;
-      --white: #fdfcf8;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Jost', sans-serif;
-      background: var(--white);
-      color: var(--forest);
-      overflow-x: hidden;
-    }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 1.2rem 4rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(253,252,248,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(26,46,26,0.08);
-      transition: all 0.3s;
-    }
-
-    .logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.6rem;
-      font-weight: 600;
-      color: var(--forest);
-      text-decoration: none;
-      letter-spacing: 0.02em;
-    }
-
-    .logo span { color: var(--amber); }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 2.5rem;
-    }
-
-    nav ul a {
-      text-decoration: none;
-      color: var(--forest);
-      font-size: 0.85rem;
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      opacity: 0.75;
-      transition: opacity 0.2s;
-    }
-
-    nav ul a:hover { opacity: 1; }
-
-    .nav-cta {
-      background: var(--forest);
-      color: var(--white) !important;
-      opacity: 1 !important;
-      padding: 0.6rem 1.4rem;
-      border-radius: 2px;
-    }
-
-    /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-left {
-      background: var(--forest);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 8rem 5rem 5rem;
-      position: relative;
-    }
-
-    .hero-left::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      opacity: 0.4;
-    }
-
-    .hero-tag {
-      display: inline-block;
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--wood);
-      margin-bottom: 1.5rem;
-      animation: fadeUp 0.8s ease forwards;
-    }
-
-    .hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3rem, 5vw, 5rem);
-      font-weight: 300;
-      line-height: 1.1;
-      color: var(--white);
-      margin-bottom: 1.5rem;
-      animation: fadeUp 0.8s 0.15s ease forwards;
-      opacity: 0;
-    }
-
-    .hero h1 em {
-      font-style: italic;
-      color: var(--wood);
-    }
-
-    .hero-desc {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: rgba(253,252,248,0.65);
-      max-width: 400px;
-      margin-bottom: 2.5rem;
-      font-weight: 300;
-      animation: fadeUp 0.8s 0.3s ease forwards;
-      opacity: 0;
-    }
-
-    .hero-btns {
-      display: flex;
-      gap: 1rem;
-      animation: fadeUp 0.8s 0.45s ease forwards;
-      opacity: 0;
-    }
-
-    .btn-primary {
-      background: var(--amber);
-      color: var(--white);
-      padding: 0.9rem 2rem;
-      border: none;
-      border-radius: 2px;
-      font-family: 'Jost', sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      transition: background 0.2s;
-    }
-
-    .btn-primary:hover { background: #b8720f; }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--white);
-      padding: 0.9rem 2rem;
-      border: 1px solid rgba(253,252,248,0.3);
-      border-radius: 2px;
-      font-family: 'Jost', sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      transition: border-color 0.2s;
-    }
-
-    .btn-outline:hover { border-color: rgba(253,252,248,0.7); }
-
-    .hero-stats {
-      display: flex;
-      gap: 2.5rem;
-      margin-top: 4rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(253,252,248,0.1);
-      animation: fadeUp 0.8s 0.6s ease forwards;
-      opacity: 0;
-    }
-
-    .stat-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.2rem;
-      font-weight: 600;
-      color: var(--wood);
-      display: block;
-    }
-
-    .stat-label {
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(253,252,248,0.5);
-    }
-
-    .hero-right {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-visual {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #2d4a2d 0%, #1a2e1a 40%, #0d1a0d 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .cottage-illustration {
-      width: 100%;
-      height: 100%;
-    }
-
-    /* SECTIONS GENERAL */
-    section { padding: 6rem 4rem; }
-
-    .section-tag {
-      display: block;
-      font-size: 0.7rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 0.8rem;
-    }
-
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 3.5vw, 3rem);
-      font-weight: 400;
-      line-height: 1.2;
-      color: var(--forest);
-      margin-bottom: 1.2rem;
-    }
-
-    .section-lead {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: var(--stone);
-      max-width: 560px;
-      font-weight: 300;
-    }
-
-    /* INTRO STRIP */
-    .intro-strip {
-      background: var(--cream);
-      padding: 3rem 4rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 2rem;
-      border-top: 3px solid var(--forest);
-    }
-
-    .intro-strip p {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      font-style: italic;
-      color: var(--forest);
-      max-width: 700px;
-      line-height: 1.6;
-    }
-
-    /* TYPES SECTION */
-    .types-section {
-      background: var(--white);
-    }
-
-    .types-header {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      margin-bottom: 4rem;
-      align-items: end;
-    }
-
-    .types-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5px;
-      background: var(--mist);
-    }
-
-    .type-card {
-      background: var(--white);
-      padding: 2.5rem;
-      transition: background 0.3s;
-      cursor: default;
-    }
-
-    .type-card:hover { background: var(--cream); }
-
-    .type-icon {
-      width: 48px;
-      height: 48px;
-      margin-bottom: 1.5rem;
-    }
-
-    .type-card h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
-      font-weight: 400;
-      color: var(--forest);
-      margin-bottom: 0.8rem;
-    }
-
-    .type-card p {
-      font-size: 0.9rem;
-      line-height: 1.7;
-      color: var(--stone);
-      font-weight: 300;
-    }
-
-    /* WOOD SECTION */
-    .wood-section {
-      background: var(--forest);
-      color: var(--white);
-    }
-
-    .wood-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      align-items: center;
-    }
-
-    .wood-section .section-title { color: var(--white); }
-
-    .wood-section .section-lead { color: rgba(253,252,248,0.65); }
-
-    .wood-features {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-top: 2.5rem;
-    }
-
-    .wood-feature {
-      border-left: 2px solid var(--amber);
-      padding-left: 1rem;
-    }
-
-    .wood-feature h4 {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--wood);
-      margin-bottom: 0.3rem;
-      letter-spacing: 0.05em;
-    }
-
-    .wood-feature p {
-      font-size: 0.82rem;
-      color: rgba(253,252,248,0.55);
-      line-height: 1.6;
-      font-weight: 300;
-    }
-
-    .wood-visual {
-      position: relative;
-    }
-
-    .wood-visual svg {
-      width: 100%;
-      height: 400px;
-    }
-
-    /* PROCESS */
-    .process-section {
-      background: var(--cream);
-    }
-
-    .process-header {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-
-    .process-header .section-lead {
-      margin: 0 auto;
-    }
-
-    .process-steps {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 0;
-      position: relative;
-    }
-
-    .process-steps::before {
-      content: '';
-      position: absolute;
-      top: 2rem;
-      left: 10%;
-      right: 10%;
-      height: 1px;
-      background: var(--mist);
-    }
-
-    .step {
-      text-align: center;
-      padding: 0 1rem;
-      position: relative;
-    }
-
-    .step-num {
-      width: 4rem;
-      height: 4rem;
-      border-radius: 50%;
-      background: var(--white);
-      border: 1px solid var(--mist);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1.5rem;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      color: var(--forest);
-      position: relative;
-      z-index: 1;
-    }
-
-    .step-num.active {
-      background: var(--forest);
-      color: var(--white);
-      border-color: var(--forest);
-    }
-
-    .step h4 {
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--forest);
-      margin-bottom: 0.5rem;
-      letter-spacing: 0.05em;
-    }
-
-    .step p {
-      font-size: 0.8rem;
-      color: var(--stone);
-      line-height: 1.6;
-      font-weight: 300;
-    }
-
-    /* LOCATIONS */
-    .locations-section {
-      background: var(--white);
-    }
-
-    .locations-header {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 4rem;
-      margin-bottom: 3rem;
-      align-items: end;
-    }
-
-    .locations-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
-    }
-
-    .location-card {
-      background: var(--cream);
-      padding: 2rem 1.5rem;
-      border-radius: 2px;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .location-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 30px rgba(26,46,26,0.1);
-    }
-
-    .loc-emoji { font-size: 2rem; margin-bottom: 1rem; display: block; }
-
-    .location-card h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      font-weight: 400;
-      color: var(--forest);
-      margin-bottom: 0.5rem;
-    }
-
-    .location-card p {
-      font-size: 0.82rem;
-      color: var(--stone);
-      line-height: 1.6;
-      font-weight: 300;
-    }
-
-    /* CONTENT / ARTICLE SECTION */
-    .content-section {
-      background: var(--cream);
-      padding: 6rem 4rem;
-    }
-
-    .content-inner {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .content-inner h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.2rem;
-      font-weight: 400;
-      color: var(--forest);
-      margin: 2.5rem 0 1rem;
-      line-height: 1.3;
-    }
-
-    .content-inner h2:first-child { margin-top: 0; }
-
-    .content-inner h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
-      font-weight: 400;
-      color: var(--forest);
-      margin: 2rem 0 0.8rem;
-    }
-
-    .content-inner p {
-      font-size: 0.95rem;
-      line-height: 1.9;
-      color: #4a4a4a;
-      margin-bottom: 1.2rem;
-      font-weight: 300;
-    }
-
-    .content-inner ul {
-      margin: 1rem 0 1.5rem 1.5rem;
-    }
-
-    .content-inner ul li {
-      font-size: 0.95rem;
-      line-height: 1.8;
-      color: #4a4a4a;
-      margin-bottom: 0.4rem;
-      font-weight: 300;
-    }
-
-    .content-divider {
-      width: 60px;
-      height: 2px;
-      background: var(--amber);
-      margin: 3rem 0;
-    }
-
-    /* FAQ */
-    .faq-section {
-      background: var(--white);
-      padding: 6rem 4rem;
-    }
-
-    .faq-header {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-
-    .faq-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .faq-item {
-      background: var(--cream);
-      padding: 2rem;
-      border-radius: 2px;
-      border-left: 3px solid var(--forest);
-    }
-
-    .faq-item h4 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.15rem;
-      font-weight: 400;
-      color: var(--forest);
-      margin-bottom: 0.8rem;
-    }
-
-    .faq-item p {
-      font-size: 0.875rem;
-      line-height: 1.7;
-      color: var(--stone);
-      font-weight: 300;
-    }
-
-    /* CTA */
-    .cta-section {
-      background: var(--forest);
-      padding: 6rem 4rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta-section::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(ellipse at center, rgba(212,132,26,0.08) 0%, transparent 60%);
-    }
-
-    .cta-section .section-title {
-      color: var(--white);
-      max-width: 700px;
-      margin: 0 auto 1.5rem;
-    }
-
-    .cta-section .section-lead {
-      color: rgba(253,252,248,0.6);
-      margin: 0 auto 2.5rem;
-      text-align: center;
-    }
-
-    .cta-form {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    .cta-form input {
-      flex: 1;
-      padding: 0.9rem 1.2rem;
-      border: 1px solid rgba(253,252,248,0.2);
-      background: rgba(253,252,248,0.08);
-      color: var(--white);
-      font-family: 'Jost', sans-serif;
-      font-size: 0.9rem;
-      border-radius: 2px;
-      outline: none;
-    }
-
-    .cta-form input::placeholder { color: rgba(253,252,248,0.35); }
-
-    .cta-form input:focus { border-color: rgba(253,252,248,0.4); }
-
-    /* FOOTER */
-    footer {
-      background: #0d1a0d;
-      padding: 4rem;
-      color: rgba(253,252,248,0.5);
-    }
-
-    .footer-inner {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 3rem;
-      margin-bottom: 3rem;
-    }
-
-    .footer-brand .logo { color: var(--white); display: block; margin-bottom: 1rem; }
-
-    .footer-brand p {
-      font-size: 0.82rem;
-      line-height: 1.7;
-      font-weight: 300;
-    }
-
-    .footer-col h5 {
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(253,252,248,0.7);
-      margin-bottom: 1.2rem;
-    }
-
-    .footer-col ul { list-style: none; }
-
-    .footer-col ul li { margin-bottom: 0.6rem; }
-
-    .footer-col ul a {
-      text-decoration: none;
-      color: rgba(253,252,248,0.45);
-      font-size: 0.85rem;
-      font-weight: 300;
-      transition: color 0.2s;
-    }
-
-    .footer-col ul a:hover { color: rgba(253,252,248,0.8); }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(253,252,248,0.08);
-      padding-top: 2rem;
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.8rem;
-    }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* MOBILE */
-    @media (max-width: 900px) {
-      nav { padding: 1rem 1.5rem; }
-      nav ul { display: none; }
-      .hero { grid-template-columns: 1fr; }
-      .hero-right { display: none; }
-      .hero-left { padding: 7rem 2rem 4rem; }
-      section { padding: 4rem 1.5rem; }
-      .intro-strip { padding: 2rem 1.5rem; flex-direction: column; }
-      .types-header { grid-template-columns: 1fr; gap: 1rem; }
-      .types-grid { grid-template-columns: 1fr; }
-      .wood-inner { grid-template-columns: 1fr; gap: 2rem; }
-      .wood-visual { display: none; }
-      .process-steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
-      .process-steps::before { display: none; }
-      .locations-header { grid-template-columns: 1fr; }
-      .locations-grid { grid-template-columns: 1fr 1fr; }
-      .faq-grid { grid-template-columns: 1fr; }
-      .footer-inner { grid-template-columns: 1fr 1fr; }
-      .cta-form { flex-direction: column; }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- NAV -->
-  <nav>
-    <a href="/" class="logo">Craft<span>Build</span></a>
-    <ul>
-      <li><a href="#kottejebi">კოტეჯები</a></li>
-      <li><a href="#xis-kottejebi">ხის კოტეჯები</a></li>
-      <li><a href="#process">პროცესი</a></li>
-      <li><a href="#locations">ლოკაციები</a></li>
-      <li><a href="#contact" class="nav-cta">კონტაქტი</a></li>
-    </ul>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-left">
-      <span class="hero-tag">კოტეჯების მშენებლობა საქართველოში</span>
-      <h1>კოტეჯები<br><em>ბუნების</em><br>გულში</h1>
-      <p class="hero-desc">ვაშენებთ კოტეჯებს და ხის კოტეჯებს საქართველოს ყველა კუთხეში. ინდივიდუალური პროექტი, ხარისხიანი მასალები, გამოცდილი გუნდი.</p>
-      <div class="hero-btns">
-        <a href="#contact" class="btn-primary">კონსულტაცია</a>
-        <a href="#kottejebi" class="btn-outline">კოტეჯები →</a>
-      </div>
-      <div class="hero-stats">
-        <div>
-          <span class="stat-num">50+</span>
-          <span class="stat-label">აშენებული კოტეჯი</span>
+    {
+      id: 2,
+      title: "საოჯახო ხის კოტეჯი",
+      size: "120მ²",
+      price: "1150₾ / მ²",
+      img: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&q=80&w=800",
+      description: "ვრცელი ორსართულიანი ხის კოტეჯები დიდი ოჯახისთვის. საუკეთესო თბოიზოლაცია და მყუდრო ტერასა.",
+      features: ["3 საძინებელი", "დიდი ტერასა", "უმაღლესი ხარისხის ხე"]
+    },
+    {
+      id: 3,
+      title: "მოდერნ კოტეჯი",
+      size: "85მ²",
+      price: "1050₾ / მ²",
+      img: "https://images.unsplash.com/photo-1493606278519-11aa9f86e40a?auto=format&fit=crop&q=80&w=800",
+      description: "თანამედროვე არქიტექტურის ხის კოტეჯები ბრტყელი გადახურვით. მაქსიმალური ბუნებრივი განათება და კომფორტი.",
+      features: ["სტუდიოს ტიპის", "ვიტრაჟული ფანჯრები", "სრული რემონტი"]
+    }
+  ];
+
+  const NavItem = ({ href, children }) => (
+    <a 
+      href={href} 
+      className="text-slate-900 hover:text-amber-800 font-medium transition-colors duration-200"
+      onClick={() => setIsMenuOpen(false)}
+    >
+      {children}
+    </a>
+  );
+
+  return (
+    <div className="min-h-screen bg-white font-sans text-slate-900">
+      {/* Navigation - Always white with shadow */}
+      <nav className={`fixed w-full z-50 transition-all duration-300 bg-white shadow-md py-3`}>
+        <div className="container mx-auto px-6 flex justify-between items-center">
+          <div className="flex items-center space-x-2">
+            <div className="bg-amber-800 p-2 rounded-lg">
+              <Home className="text-white" size={24} />
+            </div>
+            <span className="text-2xl font-bold tracking-tighter text-slate-900">
+              CHEMI<span className="text-amber-800">KOTEJI</span>.GE
+            </span>
+          </div>
+
+          <div className="hidden md:flex space-x-8 items-center">
+            <NavItem href="#home">მთავარი</NavItem>
+            <NavItem href="#about">ჩვენს შესახებ</NavItem>
+            <NavItem href="#services">კოტეჯები</NavItem>
+            <NavItem href="#contact">კონტაქტი</NavItem>
+            <a 
+              href="tel:+995568841311" 
+              className="bg-slate-900 text-white px-6 py-2 rounded-full font-semibold hover:bg-slate-800 transition-all"
+            >
+              568 84 13 11
+            </a>
+          </div>
+
+          <button className="md:hidden text-slate-900" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
         </div>
-        <div>
-          <span class="stat-num">5+</span>
-          <span class="stat-label">წლის გამოცდილება</span>
+
+        {isMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 w-full bg-white border-t border-gray-100 shadow-xl py-6 px-6 flex flex-col space-y-4">
+            <NavItem href="#home">მთავარი</NavItem>
+            <NavItem href="#about">ჩვენს შესახებ</NavItem>
+            <NavItem href="#services">ხის კოტეჯები</NavItem>
+            <NavItem href="#contact">კონტაქტი</NavItem>
+            <a 
+              href="tel:+995568841311" 
+              className="bg-amber-800 text-white px-6 py-3 rounded-xl font-semibold text-center"
+            >
+              568 84 13 11
+            </a>
+          </div>
+        )}
+      </nav>
+
+      {/* Hero Section */}
+      <header id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&q=80&w=2000" 
+            alt="თანამედროვე ხის კოტეჯები" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/70 to-slate-900/30"></div>
         </div>
-        <div>
-          <span class="stat-num">100%</span>
-          <span class="stat-label">კმაყოფილი კლიენტი</span>
-        </div>
-      </div>
-    </div>
-    <div class="hero-right">
-      <div class="hero-visual">
-        <svg class="cottage-illustration" viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg">
-          <!-- Sky/background -->
-          <defs>
-            <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" style="stop-color:#0d1a0d;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#2d4a2d;stop-opacity:1" />
-            </linearGradient>
-            <linearGradient id="woodGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#c4a882;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#8b6f47;stop-opacity:1" />
-            </linearGradient>
-            <linearGradient id="roofGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#3d2b1a;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#2a1d0f;stop-opacity:1" />
-            </linearGradient>
-          </defs>
-          <rect width="600" height="700" fill="url(#skyGrad)"/>
 
-          <!-- Stars -->
-          <circle cx="80" cy="60" r="1.5" fill="white" opacity="0.6"/>
-          <circle cx="180" cy="40" r="1" fill="white" opacity="0.5"/>
-          <circle cx="320" cy="80" r="1.5" fill="white" opacity="0.7"/>
-          <circle cx="450" cy="50" r="1" fill="white" opacity="0.4"/>
-          <circle cx="520" cy="120" r="1.5" fill="white" opacity="0.6"/>
-          <circle cx="150" cy="130" r="1" fill="white" opacity="0.5"/>
-          <circle cx="380" cy="30" r="1" fill="white" opacity="0.6"/>
-
-          <!-- Moon -->
-          <circle cx="500" cy="80" r="30" fill="#f5f0e8" opacity="0.15"/>
-          <circle cx="515" cy="70" r="28" fill="#2d4a2d" opacity="0.8"/>
-
-          <!-- Mountains background -->
-          <polygon points="0,400 120,220 240,400" fill="#1a3020" opacity="0.8"/>
-          <polygon points="100,400 250,180 400,400" fill="#1e3824" opacity="0.9"/>
-          <polygon points="280,400 420,210 560,400" fill="#1a2e1a" opacity="0.7"/>
-          <polygon points="400,400 550,240 700,400" fill="#152515" opacity="0.8"/>
-
-          <!-- Snow on mountains -->
-          <polygon points="250,180 235,220 265,220" fill="white" opacity="0.3"/>
-          <polygon points="420,210 408,240 432,240" fill="white" opacity="0.25"/>
-
-          <!-- Ground -->
-          <rect x="0" y="440" width="600" height="260" fill="#1a2e1a"/>
-          <ellipse cx="300" cy="440" rx="350" ry="20" fill="#1e3520"/>
-
-          <!-- Trees left -->
-          <g opacity="0.9">
-            <polygon points="60,440 85,320 110,440" fill="#0d2010"/>
-            <polygon points="70,390 85,290 100,390" fill="#152815"/>
-            <rect x="81" y="430" width="8" height="20" fill="#3d2b1a"/>
-          </g>
-          <g opacity="0.85">
-            <polygon points="30,440 55,350 80,440" fill="#0a1a0a"/>
-            <polygon points="38,400 55,330 72,400" fill="#0f2010"/>
-            <rect x="51" y="432" width="8" height="18" fill="#2a1d0f"/>
-          </g>
-
-          <!-- Trees right -->
-          <g opacity="0.9">
-            <polygon points="490,440 515,320 540,440" fill="#0d2010"/>
-            <polygon points="500,390 515,290 530,390" fill="#152815"/>
-            <rect x="511" y="430" width="8" height="20" fill="#3d2b1a"/>
-          </g>
-          <g opacity="0.85">
-            <polygon points="520,440 548,340 576,440" fill="#0a1a0a"/>
-            <polygon points="530,395 548,315 566,395" fill="#0f2010"/>
-            <rect x="544" y="432" width="8" height="18" fill="#2a1d0f"/>
-          </g>
-
-          <!-- COTTAGE BODY -->
-          <!-- Foundation -->
-          <rect x="155" y="405" width="290" height="15" fill="#5a4535" rx="1"/>
-
-          <!-- Main walls -->
-          <rect x="160" y="300" width="280" height="120" fill="url(#woodGrad)"/>
-
-          <!-- Wood planks horizontal lines -->
-          <line x1="160" y1="320" x2="440" y2="320" stroke="#8b6f47" stroke-width="1.5" opacity="0.6"/>
-          <line x1="160" y1="340" x2="440" y2="340" stroke="#8b6f47" stroke-width="1.5" opacity="0.6"/>
-          <line x1="160" y1="360" x2="440" y2="360" stroke="#8b6f47" stroke-width="1.5" opacity="0.6"/>
-          <line x1="160" y1="380" x2="440" y2="380" stroke="#8b6f47" stroke-width="1.5" opacity="0.6"/>
-
-          <!-- Vertical corner beams -->
-          <rect x="155" y="295" width="12" height="130" fill="#7a5f3a"/>
-          <rect x="433" y="295" width="12" height="130" fill="#7a5f3a"/>
-
-          <!-- ROOF -->
-          <polygon points="140,305 300,180 460,305" fill="url(#roofGrad)"/>
-          <!-- Roof ridge highlight -->
-          <line x1="300" y1="180" x2="300" y2="305" stroke="#5a4535" stroke-width="2" opacity="0.4"/>
-          <!-- Roof tiles suggestion -->
-          <line x1="140" y1="270" x2="460" y2="270" stroke="#2a1d0f" stroke-width="1" opacity="0.3"/>
-          <line x1="150" y1="240" x2="450" y2="240" stroke="#2a1d0f" stroke-width="1" opacity="0.3"/>
-          <line x1="170" y1="210" x2="430" y2="210" stroke="#2a1d0f" stroke-width="1" opacity="0.3"/>
-
-          <!-- Chimney -->
-          <rect x="350" y="175" width="28" height="55" fill="#5a4535"/>
-          <rect x="346" y="172" width="36" height="8" fill="#4a3828"/>
-          <!-- Smoke -->
-          <ellipse cx="364" cy="155" rx="8" ry="12" fill="rgba(255,255,255,0.06)"/>
-          <ellipse cx="360" cy="135" rx="10" ry="14" fill="rgba(255,255,255,0.04)"/>
-
-          <!-- DOOR -->
-          <rect x="268" y="345" width="64" height="75" fill="#5a3a20" rx="2"/>
-          <rect x="272" y="349" width="56" height="67" fill="#4a3020" rx="1"/>
-          <!-- Door frame -->
-          <rect x="265" y="342" width="70" height="80" fill="none" stroke="#7a5f3a" stroke-width="3" rx="2"/>
-          <!-- Door handle -->
-          <circle cx="295" cy="387" r="4" fill="#d4841a"/>
-          <!-- Door top arch hint -->
-          <path d="M268,345 Q300,330 332,345" fill="none" stroke="#7a5f3a" stroke-width="2"/>
-
-          <!-- WINDOWS -->
-          <!-- Left window -->
-          <rect x="185" y="320" width="60" height="50" fill="#1a3a5c" rx="2"/>
-          <rect x="182" y="317" width="66" height="56" fill="none" stroke="#7a5f3a" stroke-width="3" rx="2"/>
-          <line x1="215" y1="317" x2="215" y2="373" stroke="#7a5f3a" stroke-width="2"/>
-          <line x1="182" y1="344" x2="248" y2="344" stroke="#7a5f3a" stroke-width="2"/>
-          <!-- Window glow -->
-          <rect x="185" y="320" width="28" height="23" fill="#d4841a" opacity="0.25"/>
-          <rect x="185" y="345" width="28" height="22" fill="#d4841a" opacity="0.15"/>
-
-          <!-- Right window -->
-          <rect x="355" y="320" width="60" height="50" fill="#1a3a5c" rx="2"/>
-          <rect x="352" y="317" width="66" height="56" fill="none" stroke="#7a5f3a" stroke-width="3" rx="2"/>
-          <line x1="385" y1="317" x2="385" y2="373" stroke="#7a5f3a" stroke-width="2"/>
-          <line x1="352" y1="344" x2="418" y2="344" stroke="#7a5f3a" stroke-width="2"/>
-          <!-- Window glow -->
-          <rect x="387" y="320" width="28" height="23" fill="#d4841a" opacity="0.25"/>
-          <rect x="387" y="345" width="28" height="22" fill="#d4841a" opacity="0.15"/>
-
-          <!-- Window shutters left -->
-          <rect x="175" y="317" width="10" height="56" fill="#5a4535" rx="1"/>
-          <rect x="247" y="317" width="10" height="56" fill="#5a4535" rx="1"/>
-          <!-- Window shutters right -->
-          <rect x="345" y="317" width="10" height="56" fill="#5a4535" rx="1"/>
-          <rect x="417" y="317" width="10" height="56" fill="#5a4535" rx="1"/>
-
-          <!-- PORCH -->
-          <rect x="200" y="418" width="200" height="8" fill="#8b6f47" rx="1"/>
-          <!-- Porch posts -->
-          <rect x="210" y="350" width="8" height="76" fill="#7a5f3a"/>
-          <rect x="382" y="350" width="8" height="76" fill="#7a5f3a"/>
-          <!-- Porch railing -->
-          <rect x="210" y="388" width="180" height="5" fill="#8b6f47"/>
-          <rect x="220" y="393" width="4" height="25" fill="#8b6f47"/>
-          <rect x="240" y="393" width="4" height="25" fill="#8b6f47"/>
-          <rect x="260" y="393" width="4" height="25" fill="#8b6f47"/>
-          <rect x="320" y="393" width="4" height="25" fill="#8b6f47"/>
-          <rect x="340" y="393" width="4" height="25" fill="#8b6f47"/>
-          <rect x="360" y="393" width="4" height="25" fill="#8b6f47"/>
-          <rect x="380" y="393" width="4" height="25" fill="#8b6f47"/>
-
-          <!-- Porch steps -->
-          <rect x="260" y="420" width="80" height="8" fill="#9a7a55" rx="1"/>
-          <rect x="270" y="428" width="60" height="8" fill="#8b6f47" rx="1"/>
-          <rect x="278" y="436" width="44" height="6" fill="#7a5f3a" rx="1"/>
-
-          <!-- Snow on roof -->
-          <path d="M140,305 Q180,290 220,295 Q260,285 300,282 Q340,285 380,295 Q420,290 460,305" fill="white" opacity="0.12"/>
-
-          <!-- Warm light glow under cottage -->
-          <ellipse cx="300" cy="445" rx="120" ry="15" fill="#d4841a" opacity="0.12"/>
-
-          <!-- Foreground snow/ground details -->
-          <ellipse cx="160" cy="450" rx="40" ry="8" fill="rgba(255,255,255,0.06)"/>
-          <ellipse cx="440" cy="448" rx="35" ry="7" fill="rgba(255,255,255,0.06)"/>
-
-          <!-- Fireflies / magical dots -->
-          <circle cx="130" cy="380" r="2" fill="#d4841a" opacity="0.4"/>
-          <circle cx="470" cy="360" r="2" fill="#d4841a" opacity="0.35"/>
-          <circle cx="110" cy="420" r="1.5" fill="#d4841a" opacity="0.3"/>
-
-          <!-- Brand text -->
-          <text x="300" y="620" text-anchor="middle" font-family="Georgia, serif" font-size="13" fill="rgba(253,252,248,0.25)" letter-spacing="4">CRAFTBUILD.GE</text>
-          <text x="300" y="645" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="rgba(253,252,248,0.15)" letter-spacing="2">კოტეჯები • ხის კოტეჯები</text>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- INTRO STRIP -->
-  <div class="intro-strip">
-    <p>"კოტეჯი არ არის მხოლოდ სახლი — ეს არის ბუნებასთან კავშირი, სიმშვიდე, და თავისუფლება."</p>
-    <a href="#contact" class="btn-primary" style="white-space:nowrap">დაიწყეთ პროექტი</a>
-  </div>
-
-  <!-- TYPES SECTION -->
-  <section class="types-section" id="kottejebi">
-    <div class="types-header">
-      <div>
-        <span class="section-tag">სახეობები</span>
-        <h2 class="section-title">კოტეჯების<br>სახეობები</h2>
-      </div>
-      <p class="section-lead">ვაშენებთ კოტეჯების ყველა სახეობას — ხის, ქვის, კომბინირებული. თითოეული პროექტი ინდივიდუალურია და კლიენტის სურვილებს ასახავს.</p>
-    </div>
-    <div class="types-grid">
-      <div class="type-card reveal">
-        <svg class="type-icon" viewBox="0 0 48 48" fill="none">
-          <path d="M24 8L4 24h6v16h28V24h6L24 8z" stroke="#1a2e1a" stroke-width="2" fill="none"/>
-          <rect x="18" y="32" width="12" height="8" stroke="#8b6f47" stroke-width="1.5" fill="none"/>
-          <rect x="10" y="24" width="8" height="8" stroke="#8b6f47" stroke-width="1.5" fill="none"/>
-          <rect x="30" y="24" width="8" height="8" stroke="#8b6f47" stroke-width="1.5" fill="none"/>
-        </svg>
-        <h3>ხის კოტეჯები</h3>
-        <p>ბუნებრივი ხის კოტეჯები — ყველაზე პოპულარული. თბილი, ეკოლოგიური, გამძლე. ხე სუნთქავს და სახლს ჯანსაღ მიკროკლიმატს ქმნის.</p>
-      </div>
-      <div class="type-card reveal">
-        <svg class="type-icon" viewBox="0 0 48 48" fill="none">
-          <rect x="8" y="20" width="32" height="20" stroke="#1a2e1a" stroke-width="2" fill="none"/>
-          <path d="M6 20L24 8l18 12" stroke="#1a2e1a" stroke-width="2" fill="none"/>
-          <rect x="20" y="30" width="8" height="10" stroke="#8b6f47" stroke-width="1.5" fill="none"/>
-          <rect x="10" y="24" width="6" height="6" stroke="#8b6f47" stroke-width="1.5" fill="none"/>
-          <rect x="32" y="24" width="6" height="6" stroke="#8b6f47" stroke-width="1.5" fill="none"/>
-        </svg>
-        <h3>ქვის კოტეჯები</h3>
-        <p>ადგილობრივი ქვისგან ნაგები კოტეჯები. მყარი, ხანგრძლივი, ესთეტიური. განსაკუთრებით კარგი მთის რეგიონებში.</p>
-      </div>
-      <div class="type-card reveal">
-        <svg class="type-icon" viewBox="0 0 48 48" fill="none">
-          <path d="M24 6L6 22h4v20h28V22h4L24 6z" stroke="#1a2e1a" stroke-width="2" fill="none"/>
-          <line x1="8" y1="22" x2="8" y2="42" stroke="#8b6f47" stroke-width="1.5"/>
-          <line x1="40" y1="22" x2="40" y2="42" stroke="#8b6f47" stroke-width="1.5"/>
-          <rect x="18" y="32" width="12" height="10" stroke="#8b6f47" stroke-width="1.5" fill="none"/>
-        </svg>
-        <h3>ორსართულიანი კოტეჯები</h3>
-        <p>ოჯახებისთვის იდეალური ორსართულიანი კოტეჯები. ტერასა, ბაღი, ბარბეკიუ ზონა. ადგილი ყველა ოჯახის წევრისთვის.</p>
-      </div>
-      <div class="type-card reveal">
-        <svg class="type-icon" viewBox="0 0 48 48" fill="none">
-          <rect x="6" y="18" width="36" height="24" stroke="#1a2e1a" stroke-width="2" fill="none"/>
-          <path d="M6 18h36" stroke="#1a2e1a" stroke-width="2"/>
-          <path d="M6 18L24 6l18 12" stroke="#1a2e1a" stroke-width="2" fill="none"/>
-          <rect x="10" y="22" width="12" height="10" stroke="#8b6f47" stroke-width="1.5" fill="none"/>
-          <rect x="26" y="22" width="12" height="10" stroke="#8b6f47" stroke-width="1.5" fill="none"/>
-        </svg>
-        <h3>მინი კოტეჯები</h3>
-        <p>კომპაქტური კოტეჯები — 40-80 კვ.მ. ეკო ტურიზმისთვის, საქირავებლად, ან პირადი დასვენებისთვის. ხარჯები მინიმალური.</p>
-      </div>
-      <div class="type-card reveal">
-        <svg class="type-icon" viewBox="0 0 48 48" fill="none">
-          <path d="M4 28L24 8l20 20v14H4V28z" stroke="#1a2e1a" stroke-width="2" fill="none"/>
-          <rect x="14" y="34" width="8" height="8" stroke="#8b6f47" stroke-width="1.5" fill="none"/>
-          <rect x="26" y="28" width="8" height="8" stroke="#8b6f47" stroke-width="1.5" fill="none"/>
-          <line x1="4" y1="42" x2="44" y2="42" stroke="#1a2e1a" stroke-width="1.5"/>
-        </svg>
-        <h3>ვილა-კოტეჯები</h3>
-        <p>ლუქსი კლასის კოტეჯები 150+ კვ.მ. პრემიუმ მასალები, სველი წერტილები, პანორამული ხედი. ინვესტიცია, რომელიც ფასდება.</p>
-      </div>
-      <div class="type-card reveal">
-        <svg class="type-icon" viewBox="0 0 48 48" fill="none">
-          <path d="M24 4C16 4 10 10 10 18c0 10 14 26 14 26s14-16 14-26c0-8-6-14-14-14z" stroke="#1a2e1a" stroke-width="2" fill="none"/>
-          <circle cx="24" cy="18" r="5" stroke="#8b6f47" stroke-width="1.5" fill="none"/>
-        </svg>
-        <h3>კოტეჯები კონკრეტულ ლოკაციაზე</h3>
-        <p>გუდაური, კახეთი, ბათუმი, სვანეთი — ნებისმიერ ლოკაციაზე. ვეგუებით ადგილობრივ კლიმატს და ტრადიციებს.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- WOOD SECTION -->
-  <section class="wood-section" id="xis-kottejebi">
-    <div class="wood-inner">
-      <div>
-        <span class="section-tag">ხის კოტეჯები</span>
-        <h2 class="section-title">რატომ ხის<br>კოტეჯი?</h2>
-        <p class="section-lead">ხის კოტეჯი არ არის მხოლოდ ტენდენცია — ეს არის საუკეთესო არჩევანი ჯანსაღი, კომფორტული და ეკოლოგიური ცხოვრებისთვის.</p>
-        <div class="wood-features">
-          <div class="wood-feature">
-            <h4>ბუნებრივი სითბო</h4>
-            <p>ხე ბუნებრივი თბოიზოლატორია. ზამთარში თბილი, ზაფხულში გრილი.</p>
-          </div>
-          <div class="wood-feature">
-            <h4>ეკოლოგიური</h4>
-            <p>ბუნებრივი მასალა, ნულოვანი მავნე ნივთიერებები, სუფთა ჰაერი სახლში.</p>
-          </div>
-          <div class="wood-feature">
-            <h4>სიმტკიცე</h4>
-            <p>სწორად დამუშავებული ხე 100+ წელი გძელდება. გამძლეა ყველა კლიმატში.</p>
-          </div>
-          <div class="wood-feature">
-            <h4>სიჩქარე</h4>
-            <p>ხის კოტეჯის მშენებლობა 2-3 თვეში სრულდება. სწრაფი, ეფექტური.</p>
-          </div>
-          <div class="wood-feature">
-            <h4>ესთეტიკა</h4>
-            <p>ხის ბუნებრივი ტექსტურა და ფერი — უნიკალური სილამაზე, რომელსაც ვერ გაიმეოს.</p>
-          </div>
-          <div class="wood-feature">
-            <h4>ღირებულება</h4>
-            <p>ხის კოტეჯი ინარჩუნებს ღირებულებას და ქირავნობის შემოსავალი მაღალია.</p>
+        <div className="container mx-auto px-6 relative z-10 text-white pt-16">
+          <div className="max-w-3xl">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+              თანამედროვე <br />
+              <span className="text-amber-500 font-extrabold underline decoration-amber-500 underline-offset-8">ხის კოტეჯები</span>
+            </h1>
+            <p className="text-xl md:text-2xl mb-10 text-gray-200 leading-relaxed max-w-2xl">
+              ჩვენ ვაშენებთ საუკეთესო <strong>კოტეჯებს</strong> საქართველოში. ჩვენი <strong>ხის კოტეჯები</strong> გამოირჩევა გამძლეობითა და უნიკალური თბოიზოლაციით.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a 
+                href="#contact" 
+                className="bg-amber-800 hover:bg-amber-700 text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center justify-center transition-all group shadow-lg"
+              >
+                უფასო კონსულტაცია <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+              </a>
+              <div className="bg-white/10 backdrop-blur-md border border-white/20 px-8 py-4 rounded-xl flex items-center justify-center">
+                <span className="text-white font-medium italic text-lg text-center">კოტეჯები 1000₾-დან</span>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="wood-visual">
-        <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="treeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#4a6741"/>
-              <stop offset="100%" style="stop-color:#2d4a2d"/>
-            </linearGradient>
-          </defs>
-          <!-- Forest scene -->
-          <rect width="500" height="400" fill="#1a2e1a"/>
+      </header>
 
-          <!-- Background trees -->
-          <g opacity="0.4">
-            <polygon points="50,400 75,280 100,400" fill="#2d4a2d"/>
-            <polygon points="80,400 105,300 130,400" fill="#2d4a2d"/>
-            <polygon points="370,400 395,270 420,400" fill="#2d4a2d"/>
-            <polygon points="400,400 430,290 460,400" fill="#2d4a2d"/>
-          </g>
+      {/* About Section */}
+      <section id="about" className="py-24 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+            <div className="lg:w-1/2 relative">
+              <div className="absolute -top-4 -left-4 w-24 h-24 bg-amber-800 rounded-2xl -z-10 opacity-20"></div>
+              <img 
+                src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?auto=format&fit=crop&q=80&w=1200" 
+                alt="ესთეტიური ხის კოტეჯები" 
+                className="rounded-3xl shadow-2xl object-cover h-[500px] w-full"
+              />
+            </div>
+            <div className="lg:w-1/2">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-100 text-amber-900 rounded-full mb-6 font-bold text-sm uppercase tracking-wider">
+                <ThermometerSnowflake size={18} /> თბოიზოლაცია და ეფექტურობა
+              </div>
+              <h2 className="text-4xl font-bold mb-8 text-slate-900">რატომ არის ჩვენი ხის კოტეჯები საუკეთესო?</h2>
+              <div className="space-y-6 text-slate-600 text-lg leading-relaxed">
+                <p>
+                  ჩვენი <strong>ხის კოტეჯები</strong> ხასიათდება საუკეთესო ბუნებრივი თბოიზოლაციით. ხე თავისთავად იზოლატორია, რაც იმას ნიშნავს, რომ ეს <strong>კოტეჯები</strong> სითბოს ბევრად უკეთ ინარჩუნებს, ვიდრე სხვა ტიპის ნაგებობები.
+                </p>
+                <p>
+                  სწორედ ამიტომ, ჩვენი <strong>ხის კოტეჯები</strong> უზრუნველყოფს ზამთარში სიმყუდროვესა და სითბოს შენარჩუნებას, ხოლო ზაფხულში - სასიამოვნო სიგრილეს. 
+                </p>
+              </div>
+              <div className="mt-8 grid grid-cols-2 gap-4">
+                <div className="p-4 bg-white rounded-2xl shadow-sm border border-gray-100">
+                  <h4 className="font-bold text-amber-800 text-xl">30% ნაკლები</h4>
+                  <p className="text-sm">ენერგიის დანახარჯი</p>
+                </div>
+                <div className="p-4 bg-white rounded-2xl shadow-sm border border-gray-100">
+                  <h4 className="font-bold text-amber-800 text-xl">ხის კოტეჯები</h4>
+                  <p className="text-sm">100% ნატურალური</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-          <!-- Main trees -->
-          <g>
-            <polygon points="30,400 65,240 100,400" fill="url(#treeGrad)"/>
-            <polygon points="45,360 65,210 85,360" fill="#4a6741"/>
-            <rect x="60" y="390" width="10" height="20" fill="#5a4535"/>
-          </g>
-          <g>
-            <polygon points="390,400 430,230 470,400" fill="url(#treeGrad)"/>
-            <polygon points="405,360 430,205 455,360" fill="#4a6741"/>
-            <rect x="425" y="390" width="10" height="20" fill="#5a4535"/>
-          </g>
+      {/* Portfolio / Services */}
+      <section id="services" className="py-24 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <span className="text-amber-800 font-bold tracking-widest uppercase text-sm">პროექტები</span>
+            <h2 className="text-4xl md:text-5xl font-bold mt-2 text-slate-900 underline decoration-amber-100 underline-offset-8">პოპულარული კოტეჯები</h2>
+          </div>
 
-          <!-- Central big tree (cross section showing rings) -->
-          <circle cx="250" cy="200" r="130" fill="#5a4535" opacity="0.9"/>
-          <circle cx="250" cy="200" r="110" fill="none" stroke="#8b6f47" stroke-width="1.5" opacity="0.6"/>
-          <circle cx="250" cy="200" r="90" fill="none" stroke="#8b6f47" stroke-width="1.5" opacity="0.5"/>
-          <circle cx="250" cy="200" r="70" fill="none" stroke="#8b6f47" stroke-width="1.5" opacity="0.5"/>
-          <circle cx="250" cy="200" r="50" fill="none" stroke="#8b6f47" stroke-width="1.5" opacity="0.6"/>
-          <circle cx="250" cy="200" r="30" fill="none" stroke="#8b6f47" stroke-width="1.5" opacity="0.7"/>
-          <circle cx="250" cy="200" r="12" fill="#7a5f3a"/>
-          <!-- Grain lines -->
-          <path d="M130,170 Q190,185 250,180 Q310,185 370,170" fill="none" stroke="#8b6f47" stroke-width="0.5" opacity="0.3"/>
-          <path d="M145,230 Q200,215 250,220 Q300,215 355,230" fill="none" stroke="#8b6f47" stroke-width="0.5" opacity="0.3"/>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((item) => (
+              <div key={item.id} className="group overflow-hidden rounded-3xl bg-white border border-gray-100 shadow-sm hover:shadow-2xl transition-all flex flex-col h-full">
+                <div className="h-64 overflow-hidden relative">
+                  <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                  <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-1 rounded-full text-slate-900 font-bold shadow-lg">
+                    {item.price}
+                  </div>
+                </div>
+                <div className="p-8 text-center flex flex-col flex-grow">
+                  <h3 className="text-2xl font-bold mb-2">{item.title}</h3>
+                  <div className="flex justify-center items-center text-slate-500 mb-6">
+                    <CheckCircle size={16} className="text-green-500 mr-2" /> 
+                    <span>ფართობი: {item.size}</span>
+                  </div>
+                  <button 
+                    onClick={() => setSelectedProject(item)}
+                    className="mt-auto w-full py-3 rounded-xl border-2 border-slate-900 text-slate-900 font-bold hover:bg-slate-900 hover:text-white transition-all flex items-center justify-center gap-2 group"
+                  >
+                    დეტალურად <Info size={18} className="group-hover:rotate-12 transition-transform" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <!-- Labels -->
-          <text x="250" y="360" text-anchor="middle" font-family="Georgia" font-size="11" fill="rgba(253,252,248,0.3)" letter-spacing="3">ხის ბოჭკო • სიმტკიცე • სითბო</text>
-        </svg>
-      </div>
+      {/* Modal / Pop-up */}
+      {selectedProject && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300">
+          <div className="bg-white rounded-[32px] w-full max-w-2xl overflow-hidden shadow-2xl relative animate-in zoom-in-95 duration-300">
+            <button 
+              onClick={() => setSelectedProject(null)}
+              className="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 p-2 rounded-full transition-colors z-10"
+            >
+              <X size={24} />
+            </button>
+            <div className="flex flex-col md:flex-row">
+              <div className="md:w-2/5 h-64 md:h-auto overflow-hidden">
+                <img src={selectedProject.img} className="w-full h-full object-cover" alt={selectedProject.title} />
+              </div>
+              <div className="md:w-3/5 p-8 md:p-10">
+                <h3 className="text-3xl font-bold mb-4">{selectedProject.title}</h3>
+                <p className="text-slate-600 mb-6 leading-relaxed">
+                  {selectedProject.description} ჩვენი <strong>ხის კოტეჯები</strong> საუკეთესო არჩევანია თქვენთვის.
+                </p>
+                <div className="space-y-3 mb-8">
+                  {selectedProject.features.map((f, i) => (
+                    <div key={i} className="flex items-center gap-2 text-slate-700 font-medium">
+                      <div className="w-2 h-2 bg-amber-800 rounded-full"></div> {f}
+                    </div>
+                  ))}
+                </div>
+                <div className="bg-amber-50 p-6 rounded-2xl flex items-center justify-between border border-amber-100">
+                  <div>
+                    <p className="text-amber-800 text-sm font-bold uppercase tracking-wider">დაგვიკავშირდით</p>
+                    <a href="tel:+995568841311" className="text-2xl font-black text-slate-900 hover:text-amber-800 transition-colors">568 84 13 11</a>
+                  </div>
+                  <div className="bg-amber-800 p-3 rounded-xl text-white">
+                    <Phone size={24} fill="currentColor" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Contact Section */}
+      <section id="contact" className="py-24 bg-slate-900 text-white relative overflow-hidden">
+        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-amber-800/10 rounded-full blur-3xl"></div>
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="bg-white rounded-[40px] overflow-hidden flex flex-col lg:flex-row text-slate-900 shadow-2xl">
+            <div className="lg:w-1/2 p-12 lg:p-20 flex flex-col justify-center">
+              <h2 className="text-4xl font-bold mb-6 italic">შეუკვეთეთ კოტეჯები</h2>
+              <p className="text-slate-600 text-lg mb-10">დაგვიტოვეთ თქვენი საკონტაქტო ინფორმაცია და ჩვენი მენეჯერი დაგიკავშირდებათ 30 წუთში.</p>
+              
+              <form className="space-y-6">
+                <div>
+                  <label className="block text-sm font-bold mb-2 uppercase tracking-wide text-slate-400">სახელი</label>
+                  <input type="text" className="w-full px-6 py-4 rounded-xl bg-gray-50 border border-gray-200 outline-none focus:ring-2 focus:ring-amber-800/20 focus:border-amber-800 transition-all" placeholder="თქვენი სახელი" />
+                </div>
+                <div>
+                  <label className="block text-sm font-bold mb-2 uppercase tracking-wide text-slate-400">ტელეფონი</label>
+                  <input type="tel" className="w-full px-6 py-4 rounded-xl bg-gray-50 border border-gray-200 outline-none focus:ring-2 focus:ring-amber-800/20 focus:border-amber-800 transition-all" placeholder="+995 5__ __ __ __" />
+                </div>
+                <button className="w-full bg-amber-800 hover:bg-amber-700 text-white font-bold py-5 rounded-xl text-xl shadow-lg transition-all active:scale-[0.98]">
+                  მოითხოვეთ კატალოგი
+                </button>
+              </form>
+            </div>
+            
+            <div className="lg:w-1/2 bg-amber-800 p-12 lg:p-20 text-white flex flex-col justify-center">
+              <h3 className="text-3xl font-bold mb-10">კონტაქტი</h3>
+              <div className="space-y-8">
+                <div className="flex items-start gap-4">
+                  <div className="bg-white/20 p-4 rounded-2xl">
+                    <Phone size={24} />
+                  </div>
+                  <div>
+                    <p className="text-amber-100/70 text-sm uppercase font-bold tracking-widest">დაგვირეკეთ</p>
+                    <a href="tel:+995568841311" className="text-2xl font-bold hover:underline">568 84 13 11</a>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="bg-white/20 p-4 rounded-2xl">
+                    <Mail size={24} />
+                  </div>
+                  <div>
+                    <p className="text-amber-100/70 text-sm uppercase font-bold tracking-widest">მოგვწერეთ</p>
+                    <p className="text-2xl font-bold">info@chemikoteji.ge</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="bg-white/20 p-4 rounded-2xl">
+                    <MapPin size={24} />
+                  </div>
+                  <div>
+                    <p className="text-amber-100/70 text-sm uppercase font-bold tracking-widest">მისამართი</p>
+                    <p className="text-2xl font-bold">თბილისი, საქართველო</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-white py-12 border-t border-gray-100">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+            <div className="flex items-center space-x-2">
+              <div className="bg-slate-900 p-1.5 rounded-lg">
+                <Home className="text-white" size={20} />
+              </div>
+              <span className="text-xl font-bold tracking-tighter">
+                CHEMI<span className="text-amber-800">KOTEJI</span>.GE
+              </span>
+            </div>
+            
+            <div className="flex gap-8 text-slate-500 font-medium">
+              <a href="#" className="hover:text-amber-800 transition-colors">კოტეჯები</a>
+              <a href="#" className="hover:text-amber-800 transition-colors">ხის კოტეჯები</a>
+              <a href="#" className="hover:text-amber-800 transition-colors">ფასები</a>
+            </div>
+
+            <div className="text-slate-400 text-sm">
+              © {new Date().getFullYear()} ყველა უფლება დაცულია.
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
-  </section>
+  );
+};
 
-  <!-- PROCESS -->
-  <section class="process-section" id="process">
-    <div class="process-header reveal">
-      <span class="section-tag">მუშაობის პროცესი</span>
-      <h2 class="section-title">როგორ ვაშენებთ</h2>
-      <p class="section-lead">მარტივი, გამჭვირვალე პროცესი — კონსულტაციიდან გასაღების ჩაბარებამდე.</p>
-    </div>
-    <div class="process-steps">
-      <div class="step reveal">
-        <div class="step-num active">01</div>
-        <h4>კონსულტაცია</h4>
-        <p>განვიხილავთ სურვილებს, ბიუჯეტს, ლოკაციას. პასუხობთ ყველა კითხვაზე.</p>
-      </div>
-      <div class="step reveal">
-        <div class="step-num">02</div>
-        <h4>პროექტი</h4>
-        <p>ვქმნით ინდივიდუალურ არქიტექტურულ პროექტს. 3D ვიზუალიზაცია.</p>
-      </div>
-      <div class="step reveal">
-        <div class="step-num">03</div>
-        <h4>მასალები</h4>
-        <p>ვარჩევთ ხარისხიან მასალებს. ვმუშაობთ გამოცდილ მომწოდებლებთან.</p>
-      </div>
-      <div class="step reveal">
-        <div class="step-num">04</div>
-        <h4>მშენებლობა</h4>
-        <p>მშენებლობა დადგენილ ვადაში. ყოველდღიური ანგარიში და ფოტო.</p>
-      </div>
-      <div class="step reveal">
-        <div class="step-num">05</div>
-        <h4>ჩაბარება</h4>
-        <p>გასაღების ჩაბარება, 2 წლის გარანტია, მომდევნო მხარდაჭერა.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- LOCATIONS -->
-  <section class="locations-section" id="locations">
-    <div class="locations-header">
-      <div>
-        <span class="section-tag">ლოკაციები</span>
-        <h2 class="section-title">სად<br>ვაშენებთ</h2>
-      </div>
-      <p class="section-lead">კოტეჯებს ვაშენებთ საქართველოს ყველა კუთხეში. მთა, ზღვა, სოფელი, ქალაქის გარეუბანი — ნებისმიერ ადგილზე, სადაც გსურთ.</p>
-    </div>
-    <div class="locations-grid">
-      <div class="location-card reveal">
-        <span class="loc-emoji">🏔️</span>
-        <h3>მთის კოტეჯები</h3>
-        <p>გუდაური, ბაკურიანი, სვანეთი, თუშეთი. მთის კლიმატისთვის ადაპტირებული კოტეჯები — ძლიერი სახურავი, კარგი თბოიზოლაცია, ხის კამინი.</p>
-      </div>
-      <div class="location-card reveal">
-        <span class="loc-emoji">🌊</span>
-        <h3>საზღვაო კოტეჯები</h3>
-        <p>ბათუმი, ქობულეთი, ანაკლია, ურეკი. ზღვის ახლოს კოტეჯები — სოლარული პანელები, ტერასა ხედით, მარილგამძლე მასალები.</p>
-      </div>
-      <div class="location-card reveal">
-        <span class="loc-emoji">🌿</span>
-        <h3>სოფლის კოტეჯები</h3>
-        <p>კახეთი, იმერეთი, სამეგრელო, გურია. ვენახებს შორის, ბუნების გულში. აგრო ტურიზმი, ღვინო, ავთენტური ატმოსფერო.</p>
-      </div>
-      <div class="location-card reveal">
-        <span class="loc-emoji">🏙️</span>
-        <h3>თბილისის გარეუბანი</h3>
-        <p>მცხეთა, საგურამო, კოჯორი, მანგლისი. ქალაქიდან 30-60 წუთი. ყოველდღიური ცხოვრება, ბუნებით.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- LONG CONTENT SECTION -->
-  <section class="content-section" id="content">
-    <div class="content-inner">
-
-      <h2>კოტეჯები საქართველოში — სრული სახელმძღვანელო</h2>
-      <p>კოტეჯები საქართველოში სულ უფრო პოპულარული ხდება. ქვეყნის მდიდარი ბუნება, მთები, ზღვა და ღვინის მხარეები — ყველა ეს ფაქტორი კოტეჯის მშენებლობას მიმზიდველ ინვესტიციად აქცევს. CraftBuild გთავაზობთ კომპლექსურ სერვისს კოტეჯის მშენებლობის ყველა ეტაპზე.</p>
-
-      <div class="content-divider"></div>
-
-      <h2>ხის კოტეჯები — საქართველოს ოქროს სტანდარტი</h2>
-      <p>ხის კოტეჯები საქართველოში განსაკუთრებით პოპულარულია. ამის მიზეზი მარტივია — ხე საუკეთესოდ ეგუება ქართულ კლიმატს. ზამთარში სითბოს ინარჩუნებს, ზაფხულში გრილს ინახავს. ბუნებრივი ხის სახლი ჯანსაღ გარემოს ქმნის, სადაც ჰაერი სუფთაა და ნოტიობა კონტროლდება.</p>
-      <p>ხის კოტეჯების მშენებლობა სხვა მასალებთან შედარებით უფრო სწრაფია. სტანდარტული 80-120 კვ.მ ხის კოტეჯი 3-4 თვეში შეიძლება სრულად მზად იყოს — საძირკვლიდან ჩაბარებამდე. ეს განსაკუთრებით მნიშვნელოვანია, თუ სეზონზე ქირავნობის გეგმა გაქვთ.</p>
-
-      <h3>ხის კოტეჯის ტიპები:</h3>
-      <ul>
-        <li><strong>მორის კოტეჯი (Log Cabin)</strong> — კლასიკური ხის კოტეჯი მთლიანი მორებისგან. ყველაზე ტრადიციული და ესთეტიური.</li>
-        <li><strong>ფიცარ-ნაძერის კოტეჯი</strong> — გამოშრობილი ხის ფიცრებისგან. ეკონომიური და ხანგრძლივი.</li>
-        <li><strong>კარკასული ხის კოტეჯი</strong> — ხის კარკასი + სხვადასხვა საფარი. მოქნილი დიზაინი, კარგი თბოიზოლაცია.</li>
-        <li><strong>CLT (Cross Laminated Timber)</strong> — თანამედროვე ტექნოლოგია. ულტრა მყარი, ძალიან ლამაზი.</li>
-      </ul>
-
-      <div class="content-divider"></div>
-
-      <h2>კოტეჯის მშენებლობის ფასი საქართველოში</h2>
-      <p>კოტეჯის მშენებლობის ფასი მნიშვნელოვნად განსხვავდება ზომის, მასალის, ლოკაციისა და დიზაინის მიხედვით. ქვემოთ მოცემულია სარიენტაციო ფასები:</p>
-      <ul>
-        <li><strong>მინი კოტეჯი (40-60 კვ.მ)</strong> — დაახლოებით 30,000-50,000 ლარი</li>
-        <li><strong>სტანდარტული კოტეჯი (80-120 კვ.მ)</strong> — 60,000-100,000 ლარი</li>
-        <li><strong>ორსართულიანი კოტეჯი (150-200 კვ.მ)</strong> — 120,000-180,000 ლარი</li>
-        <li><strong>ვილა-კოტეჯი (200+ კვ.მ)</strong> — 200,000 ლარიდან</li>
-      </ul>
-      <p>ეს ფასები მოიცავს მშენებლობას, სარდაფს, სახურავს, კარ-ფანჯარას, შიდა სამუშაოებს. კეთილმოწყობა (სამზარეულოს კარადები, სანიტარული კვანძი, ავეჯი) ცალკე ფასდება.</p>
-
-      <div class="content-divider"></div>
-
-      <h2>კოტეჯი — ინვესტიციის პერსპექტივა</h2>
-      <p>კოტეჯის მშენებლობა საქართველოში ბოლო წლებში ერთ-ერთ ყველაზე მომგებიან ინვესტიციად იქცა. განსაკუთრებით ეს ეხება ტურისტულ ზონებს — გუდაური, ბათუმი, კახეთი.</p>
-      <p>კახეთში ერთი კოტეჯის ქირა სეზონზე შეიძლება 150-300 ლარი/ღამე იყოს. გუდაურში ზამთრის სეზონზე — 200-500 ლარი/ღამე. ბათუმში ზაფხულში — 150-400 ლარი/ღამე. წლიური შემოსავალი 20,000-60,000 ლარის ფარგლებში — ეს ნიშნავს, რომ ინვესტიცია 4-7 წელში ბრუნდება.</p>
-
-      <h3>რა გავლენას ახდენს ქირის ფასზე:</h3>
-      <ul>
-        <li>ლოკაცია და ხედი (ზღვა, მთა, ვენახი)</li>
-        <li>კოტეჯის ზომა და ოთახების რაოდენობა</li>
-        <li>კეთილმოწყობის დონე — ჯაკუზი, ბანო, კამინი</li>
-        <li>ტერასა და გარე სივრცე</li>
-        <li>Airbnb რეიტინგი და მიმოხილვები</li>
-      </ul>
-
-      <div class="content-divider"></div>
-
-      <h2>კოტეჯის მშენებლობა — ნება-რთვა და იურიდიული საკითხები</h2>
-      <p>კოტეჯის მშენებლობამდე აუცილებელია შესაბამისი ნებართვების გაფორმება. საქართველოში მშენებლობის ნებართვა გაიცემა ადგილობრივი მუნიციპალიტეტის მიერ. ჩვენ ვეხმარებით კლიენტებს ყველა დოკუმენტაციის მოსამზადებლად.</p>
-      <p>ძირითადი დოკუმენტები: მიწის ამომწერი, სამშენებლო პროექტი, ენვ-ის შეფასება (საჭიროების შემთხვევაში), ადგილობრივი მუნიციპალიტეტის ნება-რთვა. სოფლის ზონაში 500 კვ.მ-მდე შენობებისთვის გამარტივებული რეგისტრაცია მოქმედებს.</p>
-
-      <div class="content-divider"></div>
-
-      <h2>კოტეჯის მოვლა და ექსპლუატაცია</h2>
-      <p>კოტეჯის, განსაკუთრებით ხის კოტეჯის სწორი მოვლა ძალიან მნიშვნელოვანია. ხე საჭიროებს პერიოდულ დამუშავებას სპეციალური შემადგენლობებით, რომლებიც იცავს ატმოსფეროს გავლენებისგან, სოკოებისა და მწერებისგან.</p>
-      <p>CraftBuild-ი გთავაზობთ მშენებლობის შემდგომ მომსახურებასაც — ყოველწლიური ინსპექცია, ხის გადამუშავება, პატარა სარემონტო სამუშაოები. ჩვენი კლიენტები დარწმუნებულნი არიან, რომ კოტეჯი ყოველთვის შესანიშნავ მდგომარეობაში ექნებათ.</p>
-
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="faq-section" id="faq">
-    <div class="faq-header reveal">
-      <span class="section-tag">კითხვები და პასუხები</span>
-      <h2 class="section-title">ხშირად დასმული კითხვები</h2>
-    </div>
-    <div class="faq-grid">
-      <div class="faq-item reveal">
-        <h4>რა ღირს კოტეჯის მშენებლობა?</h4>
-        <p>ფასი დამოკიდებულია ზომაზე, მასალასა და ლოკაციაზე. მინი კოტეჯი 30,000 ლარიდან იწყება, სტანდარტული კი 60,000-100,000 ლარის ფარგლებშია. ზუსტ ფასს პროექტის განხილვის შემდეგ გეტყვით.</p>
-      </div>
-      <div class="faq-item reveal">
-        <h4>რამდენ ხანს გრძელდება მშენებლობა?</h4>
-        <p>ხის კოტეჯი 2-4 თვეში სრულდება. ქვის ან კომბინირებული კოტეჯი 4-8 თვე სჭირდება. ვადა დამოკიდებულია ზომასა და სირთულეზე.</p>
-      </div>
-      <div class="faq-item reveal">
-        <h4>ხის კოტეჯი რამდენ ხანს გძელდება?</h4>
-        <p>სწორად დამუშავებული და შენახული ხის კოტეჯი 50-100+ წელი გძელდება. მნიშვნელოვანია ყოველ 3-5 წელში გარე ზედაპირის განახლება.</p>
-      </div>
-      <div class="faq-item reveal">
-        <h4>შეიძლება კოტეჯი ქირავნობისთვის გამოვიყენო?</h4>
-        <p>დიახ! კოტეჯების ქირავნობა ბოლო წლებში ძალიან პოპულარული გახდა. Airbnb-ზე კოტეჯები სტაბილურ შემოსავალს ქმნიან. ჩვენ დაგეხმარებით ოპტიმალური განლაგების შექმნაში.</p>
-      </div>
-      <div class="faq-item reveal">
-        <h4>მიწა ჩემი არ გაქვს — შეგიძლიათ დამეხმაროთ?</h4>
-        <p>დიახ! ჩვენ გვყავს პარტნიორი რიელტორები, რომლებიც დაგეხმარებიან შესაბამისი მიწის პარცელის პოვნაში. კახეთი, გუდაური, ბათუმი — ყველა ლოკაციაზე.</p>
-      </div>
-      <div class="faq-item reveal">
-        <h4>გარანტია გაქვთ?</h4>
-        <p>ყველა კოტეჯზე ვიძლევით 2 წლის გარანტიას სამშენებლო სამუშაოებზე. სტრუქტურულ ელემენტებზე — 5 წლის გარანტია. გარანტიის ვადაში პრობლემებს უფასოდ ვასწორებთ.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta-section" id="contact">
-    <span class="section-tag">დაგვიკავშირდით</span>
-    <h2 class="section-title">დაიწყეთ თქვენი<br><em>კოტეჯის</em> მშენებლობა</h2>
-    <p class="section-lead">უფასო კონსულტაცია. გეტყვით ფასს, ვადას, მასალებს. პასუხს 24 საათში მოგცემთ.</p>
-    <div class="cta-form">
-      <input type="tel" placeholder="თქვენი ნომერი">
-      <a href="tel:+995000000000" class="btn-primary">დარეკეთ ახლა</a>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <a href="/" class="logo">Craft<span style="color:var(--amber)">Build</span></a>
-        <p>კოტეჯებისა და ხის კოტეჯების პროფესიონალი მშენებელი საქართველოში. ხარისხი, ვადები, გარანტია.</p>
-      </div>
-      <div class="footer-col">
-        <h5>სერვისები</h5>
-        <ul>
-          <li><a href="#kottejebi">კოტეჯები</a></li>
-          <li><a href="#xis-kottejebi">ხის კოტეჯები</a></li>
-          <li><a href="#kottejebi">ვილა-კოტეჯები</a></li>
-          <li><a href="#kottejebi">მინი კოტეჯები</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h5>ლოკაციები</h5>
-        <ul>
-          <li><a href="#locations">გუდაური</a></li>
-          <li><a href="#locations">ბათუმი</a></li>
-          <li><a href="#locations">კახეთი</a></li>
-          <li><a href="#locations">თბილისი</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h5>კომპანია</h5>
-        <ul>
-          <li><a href="#process">პროცესი</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#contact">კონტაქტი</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2024 CraftBuild. ყველა უფლება დაცულია.</span>
-      <span>კოტეჯები საქართველოში | ხის კოტეჯები | craftbuild.ge</span>
-    </div>
-  </footer>
-
-  <script>
-    // Reveal on scroll
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        }
-      });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
-
-    // Nav scroll effect
-    window.addEventListener('scroll', () => {
-      const nav = document.querySelector('nav');
-      nav.style.boxShadow = window.scrollY > 50 ? '0 2px 20px rgba(0,0,0,0.08)' : 'none';
-    });
-  </script>
-
-</body>
-</html>
+export default App;
